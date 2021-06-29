@@ -9,11 +9,11 @@
 
     public class SynchBrands
     {
-        static string url = "https://www.sahibinden.com/kategori/motosiklet";
+        private static string url = "https://www.sahibinden.com/kategori/motosiklet";
 
         public async Task<List<Brand>> TakeBrands()
         {
-            var pageContent = await GetPageContent();
+            var pageContent = await GetPageContent(url);
 
             var htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(pageContent);
@@ -46,10 +46,41 @@
             return result;
         }
 
-        private async Task<string> GetPageContent()
+        public async Task<List<Model>> TakeModels(string model, int brandId)
+        {
+            var result = new List<Model>();
+            var url = $"https://www.sahibinden.com/{ model }";
+            var content = await GetPageContent(url);
+
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(content);
+
+            var brandDiv = htmlDoc.GetElementbyId("searchCategoryContainer");
+
+            var ul = brandDiv.Descendants("ul").FirstOrDefault();
+            if (ul != null)
+            {
+                var lis = ul.Descendants("li").ToList();
+
+                foreach (var li in lis)
+                {
+                    var a = li.Descendants("a").FirstOrDefault();
+
+                    result.Add(
+                        new Model { 
+                            Name = a.GetAttributeValue("title", "-"),
+                            BrandId = brandId,
+                        });
+                }
+            }
+
+            return result;
+        }
+
+        private async Task<string> GetPageContent(string url)
         {
             using var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("User-Agent", "Brand Crawler");
+            client.DefaultRequestHeaders.Add("User-Agent", "asdsadsa");
 
             return await client.GetStringAsync(url);
         }

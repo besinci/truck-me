@@ -7,11 +7,12 @@
     {
         // Entities
         public DbSet<Brand> Brands { get; set; }
+        public DbSet<Model> Models { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlServer(@"Server=.\SQLEXPRESS;Database=TruckMeDB;Trusted_Connection=True;");
+                .UseSqlServer(@"Server=.\SQLEXPRESS;Database=TruckMeDB;Trusted_Connection=True;MultipleActiveResultSets=true");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
