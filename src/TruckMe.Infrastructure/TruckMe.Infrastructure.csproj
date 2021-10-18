@@ -1,16 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <Folder Include="Identity\" />
+    <Folder Include="Persistence\Configurations\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TruckMe.Application\TruckMe.Application.csproj" />
-    <ProjectReference Include="..\TruckMe.Infrastructure\TruckMe.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
