@@ -354,3 +354,4 @@ MigrationBackup/
 _ReSharper.*
 *DS_Store
 *.sln.ide
+*.csv
