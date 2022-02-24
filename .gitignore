@@ -355,3 +355,4 @@ _ReSharper.*
 *DS_Store
 *.sln.ide
 *.csv
+.idea/
